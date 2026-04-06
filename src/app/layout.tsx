@@ -1,14 +1,19 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { AuthProvider } from '@/hooks/useAuth'
 import { ThemeProvider } from '@/hooks/useTheme'
 import { Toaster } from 'react-hot-toast'
 import './globals.css'
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+}
+
 export const metadata: Metadata = {
   title: "Livia's Archive",
   description: 'A cute place to write your stories 🐰📚',
   manifest: '/manifest.json',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
