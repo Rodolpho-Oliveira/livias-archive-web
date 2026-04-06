@@ -7,6 +7,13 @@ import './globals.css'
 export const metadata: Metadata = {
   title: "Livia's Archive",
   description: 'A cute place to write your stories 🐰📚',
+  manifest: '/manifest.json',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: "Livia's Archive",
+  },
 }
 
 export default function RootLayout({
