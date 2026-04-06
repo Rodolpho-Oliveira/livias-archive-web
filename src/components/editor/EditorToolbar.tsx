@@ -9,7 +9,7 @@ import {
   Highlighter, Undo, Redo, ImageIcon,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { api } from '@/lib/api'
 
 interface Props {
@@ -44,6 +44,7 @@ function Divider() {
 
 export function EditorToolbar({ editor }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const [showMore, setShowMore] = useState(false)
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -61,7 +62,7 @@ export function EditorToolbar({ editor }: Props) {
   }
 
   return (
-    <div className="flex items-center flex-wrap gap-0.5 p-2 bg-white dark:bg-dark-surface border-2 border-blush dark:border-dark-border rounded-cute sticky top-0 z-10">
+    <div className="flex items-center flex-wrap gap-0.5 p-2 bg-white dark:bg-dark-surface border-2 border-blush dark:border-dark-border rounded-cute sticky top-0 z-10 overflow-x-auto">
       {/* Text formatting */}
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleBold().run()}

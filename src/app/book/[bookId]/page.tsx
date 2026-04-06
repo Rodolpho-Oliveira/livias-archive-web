@@ -224,17 +224,18 @@ export default function BookPage() {
         {/* Back button */}
         <button
           onClick={() => router.push('/library')}
-          className="btn-ghost flex items-center gap-2 mb-6 -ml-3"
+          className="btn-ghost flex items-center gap-2 mb-6 -ml-2 sm:-ml-3"
         >
           <ArrowLeft size={18} />
-          Voltar à Biblioteca
+          <span className="hidden sm:inline">Voltar à Biblioteca</span>
+          <span className="sm:hidden">Voltar</span>
         </button>
 
         {/* Book header */}
-        <div className="card !p-6 mb-6">
-          <div className="flex gap-6">
+        <div className="card !p-4 sm:!p-6 mb-6">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
             {/* Cover preview */}
-            <div className="relative group flex-shrink-0">
+            <div className="relative group flex-shrink-0 self-center sm:self-start">
               <input
                 ref={coverInputRef}
                 type="file"
@@ -443,13 +444,13 @@ export default function BookPage() {
         )}
 
         {/* Chapters */}
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-display font-bold text-cocoa dark:text-dark-text">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+          <h2 className="text-lg sm:text-xl font-display font-bold text-cocoa dark:text-dark-text">
             Capítulos 📑
           </h2>
           <button
             onClick={() => setShowCreateChapter(true)}
-            className="btn-secondary text-sm flex items-center gap-1"
+            className="btn-secondary text-sm flex items-center gap-1 whitespace-nowrap"
           >
             <Plus size={16} />
             Novo capítulo
@@ -459,7 +460,7 @@ export default function BookPage() {
         {/* New chapter form */}
         {showCreateChapter && (
           <div className="card !p-4 mb-4 border-2 border-lavender/30">
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <input
                 value={newChapterTitle}
                 onChange={(e) => setNewChapterTitle(e.target.value)}
@@ -468,17 +469,19 @@ export default function BookPage() {
                 autoFocus
                 onKeyDown={(e) => e.key === 'Enter' && handleCreateChapter()}
               />
-              <button onClick={handleCreateChapter} disabled={creatingChapter} className="btn-primary !px-4 text-sm flex items-center gap-1.5 disabled:opacity-60">
-                {creatingChapter && <Loader2 size={13} className="animate-spin" />}
-                {creatingChapter ? 'Criando...' : 'Criar'}
-              </button>
-              <button
-                onClick={() => { setShowCreateChapter(false); setNewChapterTitle('') }}
-                disabled={creatingChapter}
-                className="btn-ghost text-sm"
-              >
-                Cancelar
-              </button>
+              <div className="flex gap-2">
+                <button onClick={handleCreateChapter} disabled={creatingChapter} className="btn-primary !px-4 text-sm flex items-center gap-1.5 disabled:opacity-60 whitespace-nowrap">
+                  {creatingChapter && <Loader2 size={13} className="animate-spin" />}
+                  {creatingChapter ? 'Criando...' : 'Criar'}
+                </button>
+                <button
+                  onClick={() => { setShowCreateChapter(false); setNewChapterTitle('') }}
+                  disabled={creatingChapter}
+                  className="btn-ghost text-sm"
+                >
+                  Cancelar
+                </button>
+              </div>
             </div>
           </div>
         )}

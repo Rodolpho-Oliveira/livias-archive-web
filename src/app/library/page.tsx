@@ -42,9 +42,9 @@ export default function LibraryPage() {
     <AppLayout>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-3xl font-display font-bold text-cocoa dark:text-dark-text">
+            <h1 className="text-2xl sm:text-3xl font-display font-bold text-cocoa dark:text-dark-text">
               Biblioteca 📚
             </h1>
             <p className="text-cocoa/50 dark:text-dark-text/50 font-body mt-1">
@@ -53,7 +53,7 @@ export default function LibraryPage() {
           </div>
           <button
             onClick={() => setShowCreate(true)}
-            className="btn-primary flex items-center gap-2"
+            className="btn-primary flex items-center gap-2 whitespace-nowrap"
           >
             <Plus size={18} />
             Novo Livro
@@ -61,18 +61,18 @@ export default function LibraryPage() {
         </div>
 
         {/* Search & Filters */}
-        <div className="flex gap-3 mb-6 flex-wrap">
-          <div className="relative flex-1 min-w-[200px]">
+        <div className="space-y-3 mb-6">
+          <div className="relative">
             <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-rose/40" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="input-field !pl-11"
+              className="input-field !pl-11 w-full"
               placeholder="Buscar livros..."
             />
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             {[
               { key: 'ALL', label: 'Todos', emoji: '📚' },
               { key: 'DRAFT', label: 'Rascunho', emoji: '📝' },
@@ -82,13 +82,13 @@ export default function LibraryPage() {
               <button
                 key={filter.key}
                 onClick={() => setStatusFilter(filter.key)}
-                className={`px-4 py-2 rounded-bubble text-sm font-display font-medium transition-all ${
+                className={`px-3 sm:px-4 py-2 rounded-bubble text-xs sm:text-sm font-display font-medium transition-all whitespace-nowrap ${
                   statusFilter === filter.key
                     ? 'bg-rose text-white shadow-soft'
                     : 'bg-white dark:bg-dark-card text-cocoa/60 dark:text-dark-text/60 hover:bg-blush dark:hover:bg-dark-border border border-blush dark:border-dark-border'
                 }`}
               >
-                {filter.emoji} {filter.label}
+                {filter.emoji} <span className="hidden sm:inline">{filter.label}</span>
               </button>
             ))}
           </div>

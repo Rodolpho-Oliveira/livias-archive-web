@@ -184,21 +184,21 @@ export default function ChapterEditorPage() {
   if (!chapter) return null
 
   return (
-    <div className={`min-h-screen bg-cream dark:bg-dark-bg ${focusMode ? '' : 'ml-0'}`}>
+    <div className={`min-h-screen bg-cream dark:bg-dark-bg`}>
       {/* Top bar */}
       <div className={`sticky top-0 z-20 bg-white/80 dark:bg-dark-surface/80 backdrop-blur-sm border-b border-blush dark:border-dark-border ${focusMode ? 'opacity-0 hover:opacity-100 transition-opacity' : ''}`}>
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="max-w-5xl mx-auto px-3 sm:px-4 py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+          <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto min-w-0">
             {!focusMode && (
               <Link
                 href={`/book/${bookId}`}
-                className="text-cocoa/40 dark:text-dark-text/40 hover:text-cocoa dark:hover:text-dark-text transition-colors"
+                className="flex-shrink-0 text-cocoa/40 dark:text-dark-text/40 hover:text-cocoa dark:hover:text-dark-text transition-colors"
               >
                 <ArrowLeft size={20} />
               </Link>
             )}
-            <div>
-              <h1 className="font-display font-bold text-cocoa dark:text-dark-text text-lg">
+            <div className="min-w-0">
+              <h1 className="font-display font-bold text-cocoa dark:text-dark-text text-base sm:text-lg truncate">
                 {chapter.title}
               </h1>
               <div className="flex items-center gap-2 text-xs text-cocoa/40 dark:text-dark-text/40">
@@ -217,7 +217,7 @@ export default function ChapterEditorPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2 w-full sm:w-auto flex-wrap sm:flex-nowrap">
             {/* Chapter status */}
             <select
               value={chapterStatus}
@@ -225,7 +225,7 @@ export default function ChapterEditorPage() {
                 setChapterStatus(e.target.value as any)
                 api.updateChapter(chapterId, { status: e.target.value as any })
               }}
-              className="text-xs bg-blush dark:bg-dark-card border-0 rounded-bubble px-3 py-1.5 font-display text-cocoa dark:text-dark-text"
+              className="text-xs bg-blush dark:bg-dark-card border-0 rounded-bubble px-2 sm:px-3 py-1.5 font-display text-cocoa dark:text-dark-text"
             >
               <option value="DRAFT">📝 Rascunho</option>
               <option value="REVISION">🔍 Revisão</option>
@@ -234,7 +234,7 @@ export default function ChapterEditorPage() {
 
             <button
               onClick={() => setShowNotes(!showNotes)}
-              className={`p-2 rounded-cute transition-all ${showNotes ? 'bg-rose/20 text-berry' : 'text-cocoa/40 hover:bg-blush dark:text-dark-text/40 dark:hover:bg-dark-card'}`}
+              className={`p-2 rounded-cute transition-all flex-shrink-0 ${showNotes ? 'bg-rose/20 text-berry' : 'text-cocoa/40 hover:bg-blush dark:text-dark-text/40 dark:hover:bg-dark-card'}`}
               title="Notas"
             >
               <MessageSquare size={18} />
@@ -242,7 +242,7 @@ export default function ChapterEditorPage() {
 
             <button
               onClick={() => setShowVersions(!showVersions)}
-              className={`p-2 rounded-cute transition-all ${showVersions ? 'bg-rose/20 text-berry' : 'text-cocoa/40 hover:bg-blush dark:text-dark-text/40 dark:hover:bg-dark-card'}`}
+              className={`p-2 rounded-cute transition-all flex-shrink-0 ${showVersions ? 'bg-rose/20 text-berry' : 'text-cocoa/40 hover:bg-blush dark:text-dark-text/40 dark:hover:bg-dark-card'}`}
               title="Versões"
             >
               <History size={18} />
@@ -250,7 +250,7 @@ export default function ChapterEditorPage() {
 
             <button
               onClick={() => setFocusMode(!focusMode)}
-              className="p-2 rounded-cute text-cocoa/40 hover:bg-blush dark:text-dark-text/40 dark:hover:bg-dark-card transition-all"
+              className="p-2 rounded-cute text-cocoa/40 hover:bg-blush dark:text-dark-text/40 dark:hover:bg-dark-card transition-all flex-shrink-0"
               title={focusMode ? 'Sair do modo foco' : 'Modo foco'}
             >
               {focusMode ? <Minimize size={18} /> : <Maximize size={18} />}
@@ -259,16 +259,16 @@ export default function ChapterEditorPage() {
             <button
               onClick={handleManualSave}
               disabled={saving}
-              className="btn-primary text-sm !px-4 !py-2 flex items-center gap-1.5 disabled:opacity-60"
+              className="btn-primary text-xs sm:text-sm !px-2 sm:!px-4 !py-2 flex items-center gap-1 disabled:opacity-60 flex-shrink-0"
             >
               {saving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
-              {saving ? 'Salvando...' : 'Salvar'}
+              <span className="hidden sm:inline">{saving ? 'Salvando...' : 'Salvar'}</span>
             </button>
 
             <button
               onClick={handleSaveVersion}
               disabled={savingVersion}
-              className="btn-secondary text-sm !px-4 !py-2 flex items-center justify-center disabled:opacity-60"
+              className="btn-secondary text-sm !px-3 sm:!px-4 !py-2 flex items-center justify-center disabled:opacity-60 flex-shrink-0"
               title="Salvar versão (snapshot)"
             >
               {savingVersion ? <Loader2 size={14} className="animate-spin" /> : '📸'}
@@ -277,10 +277,10 @@ export default function ChapterEditorPage() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 py-6 flex gap-4">
+      <div className="max-w-5xl mx-auto px-3 sm:px-4 py-4 sm:py-6 flex flex-col lg:flex-row gap-4">
         {/* Main editor */}
-        <div className={`flex-1 ${focusMode ? 'max-w-3xl mx-auto' : ''}`}>
-          <div className="card !p-6">
+        <div className={`flex-1 ${focusMode ? 'max-w-3xl mx-auto w-full' : ''}`}>
+          <div className="card !p-4 sm:!p-6">
             <TipTapEditor
               content={chapter.content}
               contentKey={contentKey}
@@ -294,7 +294,7 @@ export default function ChapterEditorPage() {
 
         {/* Side panels */}
         {(showNotes || showVersions) && !focusMode && (
-          <div className="w-80 space-y-4">
+          <div className="w-full lg:w-80 space-y-4">
             {/* Notes panel */}
             {showNotes && (
               <div className="card !p-4">
